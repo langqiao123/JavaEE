@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<include file="struts-default.xml"></include>
+	
+	<!-- 配置struts2 action的后缀名 -->
+	<constant name="struts.action.extension" value="action,do" />
+	<!-- 配置struts2的开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 让struts2支持动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<!-- 请求参数的编码方式 -->
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	
+	<constant name="struts.convention.result.path" value="/" />  
+	<!-- 设置允许ognl表达式访问静态成员变量 -->
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	<package name="strutsDefault" extends="struts-default" namespace="/jaction">
+        <!-- 定义全局Result -->  
+        <global-results>  
+            <!-- 当返回login视图名时，转入/login.jsp页面 -->  
+            <result name="login">/login.jsp</result>  
+        </global-results>
+        
+        <!--验证登录用户信息  -->
+        <action name="login" class="org.langqiao.action.LoginAction" method="login">
+            <result name="error">/login.jsp</result>  
+            <result name="input">/login.jsp</result> 
+            <result name="success">/welcome.jsp</result> 
+            <!-- 显示视图资源的源码 -->
+            <!-- <result type="plainText">
+            	指定实际的视图资源
+            	<param name="location">/welcome.jsp</param>
+            	指定输出页面的字符集
+            	<param name="charset">utf8</param>
+            </result> -->
+            <!-- redirect 将请求重定向指定视图资源 -->
+            <!-- <result type="redirect">/welcome.jsp</result> -->
+            <!-- dispatcher 将请求转发给指定视图资源 -->
+            <!-- <result type="dispatcher">/welcome.jsp</result> -->
+            <!-- 当需要让一个action处理结束后，直接请求重定向到另外一个action，要用redirectAction,此前一个action的请求参数、请求属性、处理结果都会丢失 -->
+            <!-- <result type="redirectAction">
+            	<param name="actionName">login</param>
+            	<param name="namespace">/action</param>
+            </result> -->
+        </action>
+	</package>
+</struts>
